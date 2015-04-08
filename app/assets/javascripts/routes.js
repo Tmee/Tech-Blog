@@ -21,6 +21,10 @@ app.config(['$routeProvider',
       templateUrl: 'about_me.html',
       controller: 'AboutMeController'
       }).
+      when('/mandrill', {
+      templateUrl: 'mandrill_rails.html',
+      controller: 'MandrillRailsController'
+      }).
       otherwise({
         redirectTo: '/'
       });
