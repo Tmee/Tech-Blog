@@ -11,6 +11,46 @@
  * file per style scope.
  *
  *= require foundation/css/foundation
+ *= require foundation-icon-fonts/foundation-icons.css
  *= require_tree .
  *= require_self
  */
+
+
+.nav-picture {
+  height: 100px;
+  margin: 5px;
+  border-radius: 200px 200px 200px 200px;
+  -moz-border-radius: 200px 200px 200px 200px;
+  -webkit-border-radius: 200px 200px 200px 200px;
+  border: 0px solid #000000;
+}
+
+.nav-buttons {
+  margin-top: 4%;
+}
+
+.mee {
+  margin-top: 54%;
+}
+
+.white {
+  color: #FFFFFF;
+}
+
+.top-bar {
+  height: 115px;
+}
+
+.index-panel {
+  height: 272px;
+}
+
+.home-panel {
+  height: 302px;
+}
+
+.linkedin{
+  color: #069;
+}
+

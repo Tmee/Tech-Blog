@@ -1,6 +1,9 @@
-<li ng-repeat="article in articles">
-  <div class="panel">
-    <span>{{article.title}}</span>
-    <md>{{article.body}})</md>
+<a ng-repeat="article in articles" ng-href="#{{article.link}}">
+  <div class="panel callout index-panel large-6 columns text-center">
+    <div class="large-12 columns">
+      <img ng-src="{{article.image}}" alt="{{article.image}}">
+    </div><br>
+    <h3>{{article.title}}</h3><hr/>
+    <p>{{article.description}}</p>
   </div>
-</li>
+</a>

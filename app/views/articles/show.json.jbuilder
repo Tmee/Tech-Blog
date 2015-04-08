@@ -1,0 +1,1 @@
+json.(@article, :title, :description, :body, :image, :link)

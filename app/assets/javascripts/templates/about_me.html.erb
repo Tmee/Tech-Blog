@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="large-12 columns" role="content">
+    <article>
+      <h3><a href="#/about_me">About Me</i></a></h3>
+
+      <div class="row">
+        <div class="large-6 columns">
+          <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa.</p>
+          <p>Boudin aliqua adipisicing rump corned beef. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
+        </div>
+        <div class="large-6 columns">
+          <img src="assets/car1.png" alt="Image"/>
+        </div>
+      </div><br>
+
+      <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
+
+      <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
+
+    </article>
+    <hr/>
+  </div>
+
+  <div class="row">
+    <h2>Contact Me</h2>
+  </div><br>
+
+  <div class="large-4 columns text-center">
+    <h3>Email</h3>
+    tjmee90@gmail.com
+  </div>
+  <div class="large-4 columns text-center">
+    <a ng-href="#/about_me">
+      <h3>Resume</h3>
+      View PDF
+    </a>
+  </div>
+  <div class="large-4 columns text-center">
+    <a ng-href="https://www.linkedin.com/pub/timothy-mee/7b/ba3/884">
+      <h3>LinkedIn <i class="fi-social-linkedin linkedin"></i></h3>
+      Timothy Mee
+    </a>
+  </div>
+</div><br>
+
+
+<div ng-controller="ModalDemoController">
+  <script type="text/ng-template" id="myModalContent.html">
+    <h3>I'm a modal!</h3>
+    <ul>
+      <li ng-repeat="item in items">
+        <a ng-click="selected.item = item">{{ item }}</a>
+      </li>
+    </ul>
+    <p>Selected: <b>{{ selected.item }}</b></p>
+    <button class="button" ng-click="ok()">OK</button>
+    <a class="close-reveal-modal" ng-click="cancel()">&#215;</a>
+  </script>
+
+  <button class="button" ng-click="open()">Open me!</button>
+  <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+</div>

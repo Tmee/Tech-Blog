@@ -1,0 +1,14 @@
+<div class="panel" ng-show="article">
+  <span>{{article.title}}</span><hr/>
+  <p>{{article.description}}</p>
+     {{article.markdown_file}}
+     <a class="btn btn-primary view-pdf" href="<%= '{{article.markdown_file}}' %>">View PDF</a>
+
+  <md>{{article.body}}.html_safe</md>
+  <md ng-include="{{article.body}}.html_safe"></md>
+
+
+  <md ng-model="{{article.body}}.html_safe"></md>
+
+</div>
+

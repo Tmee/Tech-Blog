@@ -1,5 +1,7 @@
-var techSite = angular.module('techSite', ['templates',
-                                          'ngRoute']);
+var app = angular.module('techSite', ['templates',
+                                      'yaru22.md',
+                                      'mm.foundation',
+                                      'ngRoute']);
 
 $(document).ready(function(){
   // this keeps the top-level anchor tags in the navbar from
