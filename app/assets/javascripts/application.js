@@ -18,7 +18,7 @@
 //= require angular-md/dist/angular-md
 //= require angular-rails-templates
 //= require foundation/js/foundation
-//= require highlightjs/highlight.pack.js
+//= require highlightjs/highlight.pack
 //= require angular-foundation/mm-foundation
 //= require foundation-icon-fonts
 //= require_tree .
