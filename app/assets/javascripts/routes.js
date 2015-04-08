@@ -25,6 +25,14 @@ app.config(['$routeProvider',
       templateUrl: 'mandrill_rails.html',
       controller: 'MandrillRailsController'
       }).
+      when('/hiding_keys', {
+      templateUrl: 'hiding_keys.html',
+      controller: 'HidingKeysController'
+      }).
+      when('/omniauth', {
+      templateUrl: 'twitter_omniauth.html',
+      controller: 'OmniAuthController'
+      }).
       otherwise({
         redirectTo: '/'
       });

@@ -1,0 +1,34 @@
+<md>
+## Using Figaro
+
+
+```bash
+figaro install
+```
+
+This is the file that was created when you entered ``` figaro install ``` earlier.
+
+In app/config/application.yml add the following code.
+
+```ruby
+mandrill_key: "your_mandrill_api_key"
+mandrill_email: "your_registered_mandrill_email"
+```
+
+Add the API key you made on the Mandrill website where it says "your_mandrill_api_key"
+Now we can go back to app/config/application.rb, where we were setting the smtp settings.  Figaro makes keeping the api secret by adding a variable into the ENV hash.  We can access that API key you set to ``` mandrill_key ``` by ``` ENV["mandrill_key"] ```.  After adding the mandrill key to the config file it should look something like this:
+
+```ruby
+config.action_mailer.delivery_method = :smtp
+
+config.action_mailer.smtp_settings = {
+  address:              'smtp.mandrillapp.com',
+  port:                 '587',
+  user_name:            ENV["mandrill_email"],
+  password:             ENV["mandrill_key"],
+  authentication:       'plain',
+  enable_starttls_auto: true
+}
+```
+
+</md>

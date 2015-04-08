@@ -1,7 +1,7 @@
 <md>
-## Rails Email with Mandrill API
+## Rails Email with Mandrill
 
-#### Create a new rails app that can send emails
+#### Tutorial to create a new rails app that can send emails
 
 ---
 #### Notes on emails
@@ -20,6 +20,7 @@
   * create UserMailer
   * create UserMailer view
   * incorporate Mandrill API
+  * add user to user emails
 ---
 
 
@@ -100,7 +101,7 @@ end
 
 Open ``` app/views/user_mailer ``` and create a new file called ``` created_email.erb ```, the final path should look like ``` app/views/user_mailer/created_email.erb ```
 
-This view file is going to be the page that will be rendered once the recipient of the email opens it.  You can use normal HTML here and remember we have access to the user's details that are being saved ( name, email and password ).  The following is a simple HTML template for a welcome email.
+This view file is going to be the page that will be rendered once the recipient of the email opens it.  You can use normal HTML here and remember we have access to the user's details that are being saved ( name and email ).  The following is a simple HTML template for a welcome email.
 
 
 Now we have a User model, a UserMailer, and a UserMailer view.  The last step is to bring in the third party SMTP service api.  There are a bunch of them available, in this app we'll use Mandrill.  It is fairly simple, has some good documentation, and its free plan is more than we will need for this small project.
@@ -108,7 +109,7 @@ Now we have a User model, a UserMailer, and a UserMailer view.  The last step is
 If you already have registered with Mandrill and got an API key, skip down to the **Bring in Mandrill** section to continue.
 
 ---
-### Register with Mandrill
+### Get a Mandrill API Key
 
   * Register or Log in
     - Sign up here: [Register Mandrill.com](https://mandrill.com/signup)
@@ -144,7 +145,7 @@ config.action_mailer.smtp_settings = {
   >   - the user_name takes the email you registered with Mandrill
   >   - the password is one of your API keys.
   > * you can add the API key you made on Mandrill directly into the password, but it is always best to not let those keys be visible to the public.
-  >   - if you want to learn how to use the Figaro gem to hide your secret keys check out the **Using Figaro** section below
+  >   - if you want to learn how to use the Figaro gem to hide your secret keys check out my article on [hiding secret keys](/#/hiding_keys/) in your application
 
 ##### Now Send an Email
 
@@ -154,41 +155,5 @@ config.action_mailer.smtp_settings = {
   - the email might take a couple minutes to get to the inbox of the person you emailed
   - your [Mandrill Dashboard](https://mandrillapp.com/) will have a number of the sent emails each hour also
 
-
-
-## Using Figaro
-
-
-```bash
-figaro install
-```
-
-This is the file that was created when you entered ``` figaro install ``` earlier.
-
-In app/config/application.yml add the following code.
-
-```ruby
-mandrill_key: "your_mandrill_api_key"
-mandrill_email: "your_registered_mandrill_email"
-```
-
-Add the API key you made on the Mandrill website where it says "your_mandrill_api_key"
-Now we can go back to app/config/application.rb, where we were setting the smtp settings.  Figaro makes keeping the api secret by adding a variable into the ENV hash.  We can access that API key you set to ``` mandrill_key ``` by ``` ENV["mandrill_key"] ```.  After adding the mandrill key to the config file it should look something like this:
-
-```ruby
-config.action_mailer.delivery_method = :smtp
-
-config.action_mailer.smtp_settings = {
-  address:              'smtp.mandrillapp.com',
-  port:                 '587',
-  user_name:            ENV["mandrill_email"],
-  password:             ENV["mandrill_key"],
-  authentication:       'plain',
-  enable_starttls_auto: true
-}
-```
-
-
 </md>
 
-<div data-ng-bind-html="userMailerView"></div>
