@@ -12,6 +12,7 @@
  *
  *= require foundation/css/foundation
  *= require foundation-icon-fonts/foundation-icons.css
+ *= require highlightjs/styles/foundation
  *= require_tree .
  *= require_self
  */

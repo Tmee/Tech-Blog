@@ -1,0 +1,159 @@
+<md>
+## Rails Email with Mandrill
+
+#### Tutorial to create a new rails app that can send emails
+
+---
+#### Notes on emails
+
+  * To send an email in a Rails app, you will need to use ActionMailer and a third party SMTP API.
+
+  * SMTP stands for Simple Mail Transfer Protocol.
+    - there is a bunch of history that goes along with email
+    - it is the format used by servers when sending emails to eachother
+    - for more information on SMTP check out - [Wikipedia](/http://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol/)
+---
+
+#### Tutorial Outline:
+  * create application
+  * create User model
+  * create UserMailer
+  * create UserMailer view
+  * incorporate Mandrill API
+  * add user to user emails
+---
+
+
+## Create the Application
+
+##### First, start a terminal session and create a new rails application, put it in which ever folder you like. Type the following into your terminal
+
+```bash
+rails new email_app --database=postgresql
+```
+
+  > * The ``` --database=postgresql ``` will set the database to PostgreSQL instead of SQLite
+  > * If you want SQLite leave out the ``` --database=postgresql ```
+
+Now run ``` bundle install ``` in your terminal to bundle your gems.
+
+## Create User model
+
+##### While in your terminal, enter the following to create a user model
+
+```bash
+rails g model User name email
+```
+  > * ActiveRecord will default attribute names to a string if you do not specificly tell it otherwise
+  > * same as typing ``` rails generate User name:string email:string```
+
+
+Next, setup your database with:
+```bash
+rake db:create db:migrate
+```
+
+Now that you have a User model, open up that file (app/models/user.rb) and add the following code
+
+```ruby
+validates_presence_of :email, :name
+after_create :send_welcome_email
+
+def send_welcome_email
+  UserMailer.created_email(self).deliver_now
+end
+```
+
+  > * The first line is a Rails validation, it will require a user to have all of the attributes before the database will save the information.
+  > * The second is a Rails callback.
+  >   - ``` after_create ``` will trigger the send_welcome_email after a new user is saved.
+  >   - there are a lot of callbacks check out [Rails Guide callbacks](http://apidock.com/rails/ActiveRecord/Callbacks)
+  > * ``` send_welcome_email ``` will trigger the UserMailer to deliver the created_email
+
+## Create UserMailer
+
+##### Head back to the terminal to make the UserMailer, enter the following code in the terminal:
+
+```bash
+rails g mailer UserMailer
+```
+
+That will create a new mailer, check out the mailers folder in your app.  Open user_mailer.rb, this is where you will create different emails that deal with the users.  Add the following code to UserMailer (app/mailers/user_mailer.rb)
+
+```ruby
+default :from => "EmailService@emailapp.com"
+
+def created_email(user)
+  @user = user
+  mail( :to => @user.email,
+  :subject => "EmailService")
+end
+```
+
+  > * The ``` default :from => "EmailService@emailApp.com" ``` is where you set the email address that will be seen as the sender for each email that hits UserMailer.  This is setting "EmailService@emailapp.com" as a default sending email address for all emails that hit the UserMailer with no directly attched ``` :from => "some_email_address``` in the ``` mail ``` method
+
+  > * The ``` created_email ``` method is called in the User model after it saves.  ``` created_email ``` triggers ``` UserMailer.created_email(@user).deliver_now ```, which will pass the new user being saved to the ``` created_email ``` method inside UserMailer.  The ``` mail ``` method can take a few different arguments ([rails guide on emails](http://guides.rubyonrails.org/action_mailer_basics.html))
+
+  > * The methods in the UserMailer class act very similar to controller methods.  Each instance variable set in a method will be available in the method's corresponding view template.  In this case, all of the data linked to ``` @user ``` can be accessed in our email view template for ``` created_email ```... we'll make the view next.
+
+
+## Create UserMailer view
+
+Open ``` app/views/user_mailer ``` and create a new file called ``` created_email.erb ```, the final path should look like ``` app/views/user_mailer/created_email.erb ```
+
+This view file is going to be the page that will be rendered once the recipient of the email opens it.  You can use normal HTML here and remember we have access to the user's details that are being saved ( name and email ).  The following is a simple HTML template for a welcome email.
+
+
+Now we have a User model, a UserMailer, and a UserMailer view.  The last step is to bring in the third party SMTP service api.  There are a bunch of them available, in this app we'll use Mandrill.  It is fairly simple, has some good documentation, and its free plan is more than we will need for this small project.
+
+If you already have registered with Mandrill and got an API key, skip down to the **Bring in Mandrill** section to continue.
+
+---
+### Get a Mandrill API Key
+
+  * Register or Log in
+    - Sign up here: [Register Mandrill.com](https://mandrill.com/signup)
+    - Log in here: [Log in Mandrill.com](https://mandrillapp.com/login)
+  * After logging in, you should get redirected to you dashboard
+  * On Dashboard, click on the [Settings](https://mandrillapp.com/settings) link
+  * At the bottom of the Settings page click the ``` + New API Key ```
+    - you can add a description or just click ``` Create API Key ```
+  * We will use that key once we get Rails configured to use Mandrill
+
+---
+
+## Bring in Mandrill
+
+To use Mandrill services we need to let ActionMailer know where to go.
+Go to ``` app/config/application.rb ```, it should have a bunch of comments from rails right now.  Add the following lines inside the Application class.
+
+```ruby
+config.action_mailer.delivery_method = :smtp
+
+config.action_mailer.smtp_settings = {
+  address:              'smtp.mandrillapp.com',
+  port:                 '587',
+  user_name:            'your_registered_email',
+  password:             'your_api_key',
+  authentication:       'plain',
+  enable_starttls_auto: true
+}
+```
+  > * the first line of code forces smtp in the application
+  > * the next lets ActionMailer know where to go with the email
+  >   - you will need to set the user_name and password to your own information
+  >   - the user_name takes the email you registered with Mandrill
+  >   - the password is one of your API keys.
+  > * you can add the API key you made on Mandrill directly into the password, but it is always best to not let those keys be visible to the public.
+  >   - if you want to learn how to use the Figaro gem to hide your secret keys check out my article on [hiding secret keys](/#/hiding_keys/) in your application
+
+##### Now Send an Email
+
+* To get your welcome email, head to your terminal and open a Rails console session with ``` rails c ```.
+* Create a new user with and email address you can access with ``` User.create!(name: "Bob", email: "yourEmail@example.com") ```
+  - if this work you should see the view template get printed out to the terminal
+  - the email might take a couple minutes to get to the inbox of the person you emailed
+  - your [Mandrill Dashboard](https://mandrillapp.com/) will have a number of the sent emails each hour also
+
+</md>
+
