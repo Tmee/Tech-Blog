@@ -1,7 +1,33 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+class Seed
+
+  def initialize
+    populate_articles
+  end
+
+  def populate_articles
+    Article.create!(title: "HTML scraping with Nokogiri",
+                    description: "A walkthrough on scraping a website for data",
+                    link: "#/nokogiri/scrape_jobs")
+
+    Article.create!(title: "Rails with AngularJS",
+                    description: "A tutorial on using AngluarJS on a Rails backend",
+                    image: "https://angularjs.org/img/AngularJS-large.png",
+                    link: "#/angular_rails")
+
+    Article.create!(title: "Rails Email with Mandrill",
+                    description: "A tutorial on sending emails in a rails application",
+                    image: "http://mandrill.com/assets/images/layout/header_logo-2fb73086.png",
+                    link: "#/mandrill" )
+
+    Article.create!(title: "Hiding Secret Keys",
+                    description: "A couple ways to hide secret keys in your applications",
+                    link: "#/hiding_keys" )
+
+    Article.create!(title: "Twitter OmniAuth",
+                    description: "A tutorial on using Twitter's API for authentication",
+                    image: "https://developers.soundcloud.com/assets/posts/omniauth-f44e986c2b24f34c2a2765c73b359866.png",
+                    link: "#/omniauth")
+  end
+end
+
+Seed.new

@@ -16,10 +16,7 @@ Bundler.require(*Rails.groups)
 
 module TechSite
   class Application < Rails::Application
-    config.assets.paths << Rails.root.join("lib","assets","bower_components")
-    config.assets.paths << Rails.root.join("lib","assets","bower_components","foundatoin-icon-fonts")
 
-    config.assets.precompile << %r(.*.(?:eot|svg|ttf|woff)$)
     config.active_record.raise_in_transactional_callbacks = true
   end
 end
