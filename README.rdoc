@@ -1,3 +1,4 @@
 = Tech Blog
 
-Browse the tutorials, hope they can help in some way.
+* Browse the tutorials, hope they can help in some way.
+* Not quite ready for production
