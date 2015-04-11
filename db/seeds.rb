@@ -15,12 +15,12 @@ class Seed
                     link: "#/angular_rails")
 
     Article.create!(title: "Rails Email with Mandrill",
-                    description: "A tutorial on sending emails in a rails application",
+                    description: "A tutorial on sending emails in a new rails application",
                     image: "http://mandrill.com/assets/images/layout/header_logo-2fb73086.png",
                     link: "#/mandrill" )
 
     Article.create!(title: "Hiding Secret Keys",
-                    description: "A couple ways to hide secret keys in your applications",
+                    description: "A couple ways to hide secret keys in your application ",
                     link: "#/hiding_keys" )
 
     Article.create!(title: "Twitter OmniAuth",

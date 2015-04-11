@@ -20,7 +20,7 @@
   * create UserMailer
   * create UserMailer view
   * incorporate Mandrill API
-  * add user to user emails
+  * user to user emailing
 ---
 
 
@@ -67,8 +67,9 @@ end
   > * The first line is a Rails validation, it will require a user to have all of the attributes before the database will save the information.
   > * The second is a Rails callback.
   >   - ``` after_create ``` will trigger the send_welcome_email after a new user is saved.
-  >   - there are a lot of callbacks check out [Rails Guide callbacks](http://apidock.com/rails/ActiveRecord/Callbacks)
+  >  - there are a lot of callbacks check out [Rails Guide callbacks](http://apidock.com/rails/ActiveRecord/Callbacks)
   > * ``` send_welcome_email ``` will trigger the UserMailer to deliver the created_email
+  >   - we have not made the UserMailer yet, so that created_email won't work either.
 
 ## Create UserMailer
 
@@ -90,9 +91,9 @@ def created_email(user)
 end
 ```
 
-  > * The ``` default :from => "EmailService@emailApp.com" ``` is where you set the email address that will be seen as the sender for each email that hits UserMailer.  This is setting "EmailService@emailapp.com" as a default sending email address for all emails that hit the UserMailer with no directly attched ``` :from => "some_email_address``` in the ``` mail ``` method
+  > * The ``` default :from => "EmailService@emailApp.com" ``` is where you set the email address that will be seen as the sender for each email that hits UserMailer.  This is setting "EmailService@emailapp.com" as a default sending email address for all emails that hit the UserMailer with no directly attched ``` :from => "some_email_address" ``` in the ``` mail ``` method
 
-  > * The ``` created_email ``` method is called in the User model after it saves.  ``` created_email ``` triggers ``` UserMailer.created_email(@user).deliver_now ```, which will pass the new user being saved to the ``` created_email ``` method inside UserMailer.  The ``` mail ``` method can take a few different arguments ([rails guide on emails](http://guides.rubyonrails.org/action_mailer_basics.html))
+  > * The ``` send_welcome_email ``` method in the User model that is called after a new user is saved calls ``` UserMailer.created_email(@user).deliver_now ```, which will pass the new user to UserMailer.  The ``` mail ``` method can take a few different arguments ([rails guide on emails](http://guides.rubyonrails.org/action_mailer_basics.html))
 
   > * The methods in the UserMailer class act very similar to controller methods.  Each instance variable set in a method will be available in the method's corresponding view template.  In this case, all of the data linked to ``` @user ``` can be accessed in our email view template for ``` created_email ```... we'll make the view next.
 
@@ -100,6 +101,7 @@ end
 ## Create UserMailer view
 
 Open ``` app/views/user_mailer ``` and create a new file called ``` created_email.erb ```, the final path should look like ``` app/views/user_mailer/created_email.erb ```
+* Notice it has a ``` .erb ``` not ``` .html.erb ``` extension
 
 This view file is going to be the page that will be rendered once the recipient of the email opens it.  You can use normal HTML here and remember we have access to the user's details that are being saved ( name and email ).  The following is a simple HTML template for a welcome email.
 
@@ -145,13 +147,13 @@ config.action_mailer.smtp_settings = {
   >   - the user_name takes the email you registered with Mandrill
   >   - the password is one of your API keys.
   > * you can add the API key you made on Mandrill directly into the password, but it is always best to not let those keys be visible to the public.
-  >   - if you want to learn how to use the Figaro gem to hide your secret keys check out my article on [hiding secret keys](/#/hiding_keys/) in your application
+  >   - if you want some ideas on how to hide your secret keys check out my article on [hiding secret keys](/#/hiding_keys/) in your application
 
 ##### Now Send an Email
 
 * To get your welcome email, head to your terminal and open a Rails console session with ``` rails c ```.
 * Create a new user with and email address you can access with ``` User.create!(name: "Bob", email: "yourEmail@example.com") ```
-  - if this work you should see the view template get printed out to the terminal
+  - if everything worked you should see the view template get printed out to the terminal
   - the email might take a couple minutes to get to the inbox of the person you emailed
   - your [Mandrill Dashboard](https://mandrillapp.com/) will have a number of the sent emails each hour also
 

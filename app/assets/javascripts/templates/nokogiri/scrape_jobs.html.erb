@@ -1,10 +1,13 @@
 <md>
 ## Scraping a website with Nokogiri and XPath
 
-Note: if you don't have the Nokogiri gem, first download it locally:
-``` ruby
-gem install 'nokogiri'
-```
+> Note: if you don't have the Nokogiri gem already installed, first download it locally:
+>
+> In your terminal enter the following code
+>
+> ``` ruby
+> gem install 'nokogiri'
+> ```
 
 To setup your environment to use Nokogiri you need to require both the Nokogiri gem and the OpenURI module from ruby.
 Go ahead and start a new pry or irb session in your terminal and type:
@@ -17,7 +20,7 @@ Now require the OpenURI module by typing:
 require 'open-uri'
 ```
 
-Once both of those are set, we can now use the gem and module
+Both of those should return true.  Now we can now use the gem and module
 to grab a webpage that we pass it.  You will need the url of a website to get the information off of it.
 ``` ruby
 Nokogiri::HTML(open("https://weworkremotely.com/jobs/search?term=ruby"))
@@ -67,31 +70,31 @@ The ``` xpath("//div") ``` is the start to how you will be dropping down into th
 4. when looking for specific elements with an id or class, use contains or position.
 
     ```
-    document.xpath("//div//a//li[contains(@class, "someClassName')]")
+    document.xpath("//div//a//li[contains(@class, 'someClassName')]")
     ```
       * will return the ``` li ``` with ``` class='someClassName' ```
 
     ```
-    document.xpath("//div//a//li[contains(@id, "someIDName')]")
+    document.xpath("//div//a//li[contains(@id, 'someIDName')]")
     ```
       * will return the ``` li ``` with ``` id='someIDName' ```
 
     ```
-    document.xpath("//div//a//li[position() <= 2]
+    document.xpath("//div//a//li[position() <= 2]")
     ```
-      * will return the 1st and 2nd ``` li ``` inside the every ``` a ``` element
+      * will return the 1st and 2nd ``` li ``` inside every ``` a ``` element
 
 ---
 
 ##### Back to scraping ~
 
-I found starting from the highest point of the DOM and working down into the nested parts works best.  This might mean you will
-end up with an enormous xpath string, but its cool... you can always clean up the code later if you're feel crazy.  The more
-specific you are the better chance of getting the correct information, until the site you are scraping changes.
+I found starting from the highest point of the DOM and working down into the nested parts works best.  This might mean you
+end up with an enormous xpath, but its cool... you can always clean up the code later if you're feeling crazy.  The more
+specific you are the better chance of scraping the correct information, until the site you are using changes.
 
 
 So, let's scrape some HTML (continuing from the top section)
-I took a website, weworkremotely.com, and ran a search for "ruby".  This returned the url ``` https://weworkremotely.com/jobs/search?term=ruby ```.  We'll be using this as our main document where all our information lies.  Looking at the webpage I can see that the info I want, job titles and links, are all located inside a table in the middle of the page.
+I went to a website, weworkremotely.com, and ran a search for "ruby".  This returned the url ``` https://weworkremotely.com/jobs/search?term=ruby ```.  We'll be using this as our main document where all our information lies.  Looking at the webpage I can see that the info I want, job titles and links, are all located inside a table in the middle of the page.
 
 Try going to that url and opening up your inspector.  Walk down the DOM with your mouse, try to open up the different elements and see what gets highlighted on the screen.  Keep poking around until that highlighted section is only over the table containing all the jobs.
 
@@ -110,12 +113,19 @@ rows = document.xpath("//div[contains(@class, 'container')]//div[contains(@class
 //section[contains(@class,'jobs')]//article//ul//li")
 ```
   * This is the full xpath to get all the rows inside the table with jobs.
+  * If you want to see the how I got there, start with ``` document.xpath("//div[contains(@class, 'container')]") ```
+    - then keep adding the next elements, one by one
+      - document.xpath("//div[contains(@class, 'container')]//div[contains(@class, 'content')]")
+      - document.xpath("//div[contains(@class, 'container')]//div[contains(@class, 'content')]
+//section[contains(@class,'jobs')]")
+      - ...etc.
+    - try following the xpath manually in your insector.
   * Those rows are actually all of the ``` li ``` elements inside of the job table
   * This will return an ``` Nokogiri::XML::NodeSet ```, basically and array of nodesets
   * It has a bunch of information you don't care about,
   * so let's narrow it down to only the title and links
 
-3.This next method will return a array of hashes with the title and link for each job
+3.This next method will return an array of hashes with the title and link for each job
   * take a look and play around with it, I'll explain in more detail below
 
 ``` ruby
@@ -129,7 +139,7 @@ end
 
   * Try putting a ``` binding.pry ``` under the ``` rows.collect ```, what is ``` row.class ```?
   * The row is still a ``` Nokogiri::XML::Document ```, which means we can still call xpath on it - Oh the joy.
-  * The starting syntax changes a bit if you looked closely at the xpath on the doc and on the row notice
+  * The starting syntax changes a bit if you looked closely at the xpaths that are passed on the document and on the row notice:
     - There are no ``` // ``` before the first element's name on the xpath for the row
     - Other than that, it is the same idea of walking down the DOM to find elements with the information you want.
   * The methods that are called after the last ``` ) ``` in the xpath are Nokogiri methods.
