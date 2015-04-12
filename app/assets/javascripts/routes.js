@@ -9,10 +9,6 @@ app.config(['$routeProvider',
         templateUrl: 'articles/index.html',
         controller: 'ArticleIndexController'
       }).
-      when('/articles/:id', {
-      templateUrl: 'articles/show.html',
-      controller: 'ArticleShowController'
-      }).
       when('/nokogiri/scrape_jobs', {
       templateUrl: 'nokogiri/scrape_jobs.html',
       controller: 'NokogiriController'

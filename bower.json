@@ -9,18 +9,11 @@
       "jquery": "^1.11.1",
       "foundation": "~5.5.1",
       "coffee-script": "1.9.1",
-      "rails-csrf": "~1.0.1",
       "marked": "latest",
       "highlightjs": "latest",
       "angular-foundation": "latest",
       "foundation-icon-fonts": "latest",
       "angular-markdown-directive": "latest"
-    }
-  },
-  "vendor": {
-    "name": "bower-rails generated vendor assets",
-    "dependencies": {
-      // "three.js"    : "https://raw.github.com/mrdoob/three.js/master/build/three.js"
     }
   }
 }
