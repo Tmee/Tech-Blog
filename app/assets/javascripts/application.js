@@ -21,4 +21,6 @@
 //= require highlightjs/highlight.pack
 //= require angular-foundation/mm-foundation
 //= require foundation-icon-fonts
+//= require_tree ../templates
 //= require_tree .
+
