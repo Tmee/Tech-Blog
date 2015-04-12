@@ -13,14 +13,14 @@
 //= require jquery
 //= require jquery_ujs
 //= require angular
-//= require marked/lib/marked
 //= require angular-route
 //= require angular-md/dist/angular-md
 //= require angular-rails-templates
-//= require foundation/js/foundation
+//= require marked/lib/marked
 //= require highlightjs/highlight.pack
 //= require angular-foundation/mm-foundation
+//= require foundation/js/foundation
 //= require foundation-icon-fonts
-//= require_tree ../templates
+//= require_tree ./templates
 //= require_tree .
 
