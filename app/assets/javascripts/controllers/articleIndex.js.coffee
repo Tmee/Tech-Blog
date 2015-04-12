@@ -6,6 +6,4 @@ app.controller 'ArticleIndexController', ['$scope', '$location', '$http', ($scop
 
   $scope.viewArticle = (id) ->
     $location.url "/articles/#{id}"
-
-  console.log('article index controller HIT ')
 ]

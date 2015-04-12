@@ -1,3 +1,3 @@
-app.controller 'NokogiriController', ['$scope', '$http', ($scope, $http) ->
+app.controller 'NokogiriController', ['$scope', ($scope) ->
 
 ]
