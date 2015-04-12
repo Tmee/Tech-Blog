@@ -14,10 +14,11 @@
 //= require angular-route
 //= require angular-md/dist/angular-md
 //= require angular-rails-templates
-//= require_tree ./templates
-//= require_tree ./controllers
 //= require jquery
 //= require jquery_ujs
+//= require app
+//= require_tree ./templates
+//= require_tree ./controllers
 //= require marked/lib/marked
 //= require highlightjs/highlight.pack
 //= require angular-foundation/mm-foundation
