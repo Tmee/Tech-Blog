@@ -10,26 +10,27 @@ app.config(['$routeProvider',
         controller: 'ArticleIndexController'
       }).
       when('/nokogiri/scrape_jobs', {
-      templateUrl: 'nokogiri/scrape_jobs.html',
-      controller: 'NokogiriController'
+        templateUrl: 'nokogiri/scrape_jobs.html',
+        controller: 'NokogiriController'
       }).
       when('/about_me', {
-      templateUrl: 'about_me.html',
-      controller: 'AboutMeController'
+        templateUrl: 'about_me.html',
+        controller: 'AboutMeController'
       }).
       when('/mandrill', {
-      templateUrl: 'mandrill_rails.html',
-      controller: 'MandrillRailsController'
+        templateUrl: 'mandrill_rails.html',
+        controller: 'MandrillRailsController'
       }).
       when('/hiding_keys', {
-      templateUrl: 'hiding_keys.html',
-      controller: 'HidingKeysController'
+        templateUrl: 'hiding_keys.html',
+        controller: 'HidingKeysController'
       }).
       when('/omniauth', {
-      templateUrl: 'twitter_omniauth.html',
-      controller: 'OmniAuthController'
+        templateUrl: 'twitter_omniauth.html',
+        controller: 'OmniAuthController'
       }).
       otherwise({
-        redirectTo: '/'
+        templateUrl: 'home.html',
+        controller: 'HomeController'
       });
 }]);

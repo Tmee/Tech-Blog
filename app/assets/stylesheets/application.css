@@ -11,7 +11,7 @@
  * file per style scope.
  *
  *= require foundation/css/foundation
- *= require foundation-icon-fonts/foundation-icons.css
+ *= require foundation-icon-fonts/foundation-icons
  *= require highlightjs/styles/foundation
  *= require_tree .
  *= require_self
