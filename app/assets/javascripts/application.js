@@ -15,6 +15,7 @@
 //= require angular-md/dist/angular-md
 //= require angular-rails-templates
 //= require_tree ./templates
+//= require_tree ./controllers
 //= require jquery
 //= require jquery_ujs
 //= require marked/lib/marked
