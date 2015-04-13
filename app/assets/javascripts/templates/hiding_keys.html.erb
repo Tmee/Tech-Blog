@@ -1,22 +1,73 @@
 <md>
-## Using Figaro
+
+## Hiding Secret Keys
+
+* At times you will need to keep some information secret in a project.
+* In a rails appication there are a few ways to hide those keys
+  - your bash profile
+  - the environment hash
+  - gems
 
 
-```bash
-figaro install
-```
+## Bash Profile
 
-This is the file that was created when you entered ``` figaro install ``` earlier.
+* To access the bash_profile on your computer go to the terminal and enter ``` subl ~/.bash_profile ```
+  > - ``` subl ``` will open up the bash_profile inside of sublime on my computer,
+  > - feel free to use which ever editor you like most
 
-In app/config/application.yml add the following code.
+* After you open your bash_profile you can add shortcuts, modify your terminal's appearance, and most importantly for this part is export secret keys.
+* to get the secret key into your bash_profile so your application can see it enter something like the following:
+  - ``` export SECRET_KEY_NAME=secret_key_value ```
+  - the ``` SECRET_KEY_NAME ``` is the variable name you give the key that you are saving
+    - that varible name is also how you will access the key in your application
+  - once your bash_profile gets loaded it will run that command which will place what comes after the export into the env hash
+  - if you reload your bash_profile ( ``` source ~/.bash_profile ``` ) that variable will be available to you by its name
+    - to see a varibale's value enter ``` echo $SECRET_KEY_NAME ``` in your terminal
+
+## Environment Hash
+
+* Using the environment hash is just like using your bash_profile, but instead of the variable being loaded every time your bash_profile is loaded and for every project that bash_profile is associated with you can set environment variables for specific terminal sessions.
+
+* This should only be a temporary solution, because you will loose access to the keys once you close the terminal session you set them in.
+
+* The variables are set the same way as in the bash_profile, enter ``` export SECRET_KEY_NAME=secret_key_value ``` into the terminal session you want to use the key in
+
+* Then type ``` env ``` to see your whole environment hash
+* You could also enter ``` echo $SECRET_KEY_NAME ``` to see the value
+* You can access the variable inside your application with ``` ENV[SECRET_KEY_VALUE] ```
+
+## Using a Gem
+
+* There are a few Ruby Gems that will save you some time and can make hiding keys a little more straight forward.
+* For this example we will use the Figaro gem
+
+To download the gem locally enter
+
+> ``` gem install figaro ```
+
+Or just add the gem into the Gemfile of your rails application
+> ``` gem 'figaro' ```
+
+Now run ``` bundle install ``` to bundle your gems
+
+Once that finishes enter ``` figaro install ```
+* This will create a new file inside of the config folder of your application.
+* Head to ``` config/application.yml ```
+
+That file is where you will set all of the secret key variable names you want for your application
+To go off the my article on sending emails in a rails application, I will use the Mandrill API as an example
+
+In ``` app/config/application.yml ``` add the following code.
 
 ```ruby
 mandrill_key: "your_mandrill_api_key"
 mandrill_email: "your_registered_mandrill_email"
 ```
+> - "your_mandrill_api_key" will be the secret API key you generate from your Mandrill account
+> - Figaro will export all of the variables inside this file into the env hash for this application.
 
-Add the API key you made on the Mandrill website where it says "your_mandrill_api_key"
-Now we can go back to app/config/application.rb, where we were setting the smtp settings.  Figaro makes keeping the api secret by adding a variable into the ENV hash.  We can access that API key you set to ``` mandrill_key ``` by ``` ENV["mandrill_key"] ```.  After adding the mandrill key to the config file it should look something like this:
+
+In my tutorial on sending emails we were using the Mandrill API key in our application config.  The following code is an example of how oyu would access the variable once you set them inside the ``` application.yml ``` file
 
 ```ruby
 config.action_mailer.delivery_method = :smtp
@@ -30,5 +81,7 @@ config.action_mailer.smtp_settings = {
   enable_starttls_auto: true
 }
 ```
+
+
 
 </md>
