@@ -27,6 +27,28 @@
   border: 0px solid #000000;
 }
 
+
+.topStory {
+  z-index: 1;
+  position: relative;
+  overflow: hidden;
+  height: 1000px;
+  width: 400px;
+  .img {
+    position: absolute;
+    opacity: 0;
+    height: auto;
+    width: 100%;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+    &:nth-child(1) {
+      opacity: 1;
+    }
+  }
+}
+
 .nav-buttons {
   margin-top: 4%;
 }

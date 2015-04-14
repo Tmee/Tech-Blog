@@ -1,0 +1,9 @@
+<a ng-repeat="story in stories" ng-href="#{{story.link}}">
+  <div class="panel callout index-panel large-6 columns text-center">
+    <div class="large-12 columns">
+      <img ng-src="{{story.image}}" alt="{{story.image}}">
+    </div><br>
+    <h3>{{story.header}}</h3><hr/>
+    <p>{{story.detail}}</p>
+  </div>
+</a>

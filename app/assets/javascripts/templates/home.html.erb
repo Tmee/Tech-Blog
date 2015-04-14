@@ -1,10 +1,30 @@
 <div class="row">
   <div class="large-12 columns">
-    <div id="slider">
-      <img src="http://placehold.it/1000x400&text=[ img 1 ]"/>
+    <div style="width:1000px;height:400px;">
+      <div class="row text-center" ng-controller="CnetIndexController">
+        <div ng-repeat="story in stories">
+          <a ng-href="{{story.link}}">
+            <div class="large-4 columns home-panel" style="background-image: url({{story.image}})">
+              <br/><br/>
+              <h4>{{story.header}}</h4><hr/>
+              <p>{{story.detail}}</p>
+            </div>
+          </a>
+        </div>
+      </div>
     </div><hr/>
   </div>
 </div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <div class="topStory home-images" ng-controller="CnetIndexController">
+      <img ng-src="{{backgroundUrl1}}">
+      <img ng-src="{{backgroundUrl2}}">
+      <img ng-src="{{backgroundUrl3}}">
+    </div>
+  </div>
+</div><br>
 
 <div class="row text-center">
   <a ng-href="#/articles"><h2 class="subheader">Browse Tutorials</h2></a>
