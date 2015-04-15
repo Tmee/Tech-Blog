@@ -1,5 +1,4 @@
 <md>
-
 ## Hiding Secret Keys
 
 * At times you will need to keep some information secret in a project.
@@ -7,7 +6,6 @@
   - your bash profile
   - the environment hash
   - gems
-
 
 ## Bash Profile
 
@@ -17,12 +15,16 @@
 
 * After you open your bash_profile you can add shortcuts, modify your terminal's appearance, and most importantly for this part is export secret keys.
 * to get the secret key into your bash_profile so your application can see it enter something like the following:
-  - ``` export SECRET_KEY_NAME=secret_key_value ```
-  - the ``` SECRET_KEY_NAME ``` is the variable name you give the key that you are saving
-    - that varible name is also how you will access the key in your application
-  - once your bash_profile gets loaded it will run that command which will place what comes after the export into the env hash
-  - if you reload your bash_profile ( ``` source ~/.bash_profile ``` ) that variable will be available to you by its name
-    - to see a varibale's value enter ``` echo $SECRET_KEY_NAME ``` in your terminal
+```bash
+export SECRET_KEY_NAME=secret_key_value
+```
+  > - the ``` SECRET_KEY_NAME ``` is the variable name you give the key that you are saving
+  >   - that varible name is also how you will access the key in your application
+  > - the ``` secret_key_value ``` should be set to whatever the value of the key is
+  > - once your bash_profile gets loaded it will run that command which will place whatever comes after the ``` export ``` into the environment hash
+  > - if you reload your bash_profile that variable will be available to you by its name
+  >   - to reload your bash_profile enter ``` source ~/.bash_profile ```
+  >   - to see a variable's value enter ``` echo $SECRET_KEY_NAME ``` in your terminal
 
 ## Environment Hash
 
@@ -34,7 +36,7 @@
 
 * Then type ``` env ``` to see your whole environment hash
 * You could also enter ``` echo $SECRET_KEY_NAME ``` to see the value
-* You can access the variable inside your application with ``` ENV[SECRET_KEY_VALUE] ```
+* You can access the variable inside your application with ``` ENV['SECRET_KEY_VALUE'] ```
 
 ## Using a Gem
 
@@ -57,7 +59,7 @@ Once that finishes enter ``` figaro install ```
 That file is where you will set all of the secret key variable names you want for your application.
 
 
-To go off the my article on sending emails in a rails application, I will use the Mandrill API as an example.
+To go off the my [article](/mandrill/) on sending emails in a rails application, I will use the Mandrill API as an example.
 
 In ``` app/config/application.yml ``` add the following code.
 
@@ -65,11 +67,10 @@ In ``` app/config/application.yml ``` add the following code.
 mandrill_key: "your_mandrill_api_key"
 mandrill_email: "your_registered_mandrill_email"
 ```
-> - "your_mandrill_api_key" will be the secret API key you generate from your Mandrill account
+> - "your_mandrill_api_key" will be the API key you generate from your Mandrill account
 > - Figaro will export all of the variables inside this file into the env hash for this application.
 
-
-In my tutorial on sending emails we were using the Mandrill API key in our application config.  The following code is an example of how your would access the variable once you set them inside the ``` application.yml ``` file
+After setting those keys inside the ``` config/application.yml ``` file you can then access them  just like any other key in the env hash.  The following code is an example of how you would access the variables using Figaro from the Mandrill/ Rails example... the following code would be inside of the ``` config/application.yml ``` file from that walkthrough.
 
 ```ruby
 config.action_mailer.delivery_method = :smtp
@@ -83,7 +84,4 @@ config.action_mailer.smtp_settings = {
   enable_starttls_auto: true
 }
 ```
-
-
-
 </md>
