@@ -23,6 +23,35 @@
 //= require highlightjs/highlight.pack
 //= require angular-foundation/mm-foundation
 //= require foundation/js/foundation
+//= require foundation/js/foundation/foundation.orbit
 //= require foundation-icon-fonts
 //= require_tree .
 
+$(document).ready(function(){
+
+    $(document).foundation({
+        orbit: {
+            animation: 'fade',
+            timer: true,
+            timer_speed: 4000,
+            timer_paused_class: 'slider-pause',
+            slide_number: true,
+            pause_on_hover: false,
+            animation_speed: 1000,
+            navigation_arrows: true,
+            variable_height: false,
+            bullets: true
+        }
+    });
+
+    $(".orbit-timer").click();
+
+    $("#featured").siblings(".slider-pause").click();
+
+    $("#reloadRoute").click() = function() {
+       $route.reload();
+       console.log("hithithithithiti")
+    }
+
+
+});

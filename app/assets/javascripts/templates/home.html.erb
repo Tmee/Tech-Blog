@@ -1,34 +1,36 @@
-<div class="row">
-  <div class="large-12 columns">
-    <div style="width:1000px;height:400px;">
-      <div class="row text-center" ng-controller="CnetIndexController">
-        <div ng-repeat="story in stories">
-          <a ng-href="{{story.link}}">
-            <div class="large-4 columns home-panel" style="background-image: url({{story.image}})">
-              <br/><br/>
-              <h4>{{story.header}}</h4><hr/>
-              <p>{{story.detail}}</p>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div><hr/>
-  </div>
-</div>
+<div class="row" ng-controller="CnetIndexController">
+  <ul id="featured" data-orbit class="example-orbit-content" >
+    <li data-orbit-slide="topStory-1">
+      <img ng-src="{{cnetStory1.image}}" alt="slide 1" />
 
-<div class="row">
-  <div class="large-12 columns">
-    <div class="topStory home-images" ng-controller="CnetIndexController">
-      <img ng-src="{{backgroundUrl1}}">
-      <img ng-src="{{backgroundUrl2}}">
-      <img ng-src="{{backgroundUrl3}}">
-    </div>
-  </div>
-</div><br>
+      <div class="orbit-caption">
+        <h3>{{cnetStory1.header}}</h3>
+        <p>{{cnetStory1.detail}}</p>
+      </div>
+    </li>
+    <li data-orbit-slide="topStory-2">
+      <img ng-src="{{cnetStory2.image}}" alt="slide 2" />
+
+      <div class="orbit-caption">
+        <h3>{{cnetStory2.header}}</h3>
+        <p>{{cnetStory2.detail}}</p>
+      </div>
+    </li>
+    <li data-orbit-slide="topStory-3">
+      <img ng-src="{{cnetStory3.image}}" alt="slide 3" />
+
+      <div class="orbit-caption">
+        <h3>{{cnetStory3.header}}</h3>
+        <p>{{cnetStory3.detail}}</p>
+      </div>
+    </li>
+  </ul>
+</div>
 
 <div class="row text-center">
   <a ng-href="#/articles"><h2 class="subheader">Browse Tutorials</h2></a>
 </div><br>
+
 <div class="row text-center" ng-controller="ArticleIndexController">
   <div ng-repeat="article in articles | limitTo:3">
     <a ng-href="#{{article.link}}">
