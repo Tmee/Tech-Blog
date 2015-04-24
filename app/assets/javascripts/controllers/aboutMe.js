@@ -1,4 +1,4 @@
-app.controller("AboutMeController", ['$scope', function ($scope) {
+app.controller "AboutMeController", ['$scope', ($scope) ->
   'use strict'
 
-}]);
+]
