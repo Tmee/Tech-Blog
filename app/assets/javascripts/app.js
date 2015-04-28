@@ -1,7 +1,7 @@
 var app = angular.module('techSite', ['templates',
+                                      'ngRoute',
                                       'yaru22.md',
-                                      'mm.foundation',
-                                      'ngRoute']);
+                                      'mm.foundation']);
 
 $(document).ready(function(){
   $('a.dropdown-toggle').click(function(e){

@@ -2,14 +2,14 @@
   "lib": {
     "name": "bower-rails generated lib assets",
     "dependencies": {
-      "angular": "1.3.15",
+      "angular": "1.2.10",
       "angular-route": "1.2.28",
       "jquery": "^1.11.1",
       "coffee-script": "1.9.1",
       "marked": "latest",
       "angular-md": "1.0.0",
       "highlightjs": "latest",
-      "foundation": "5.0.0",
+      "foundation": "5.0.3",
       "angular-foundation": "latest",
       "foundation-icon-fonts": "latest"
     }

@@ -23,7 +23,8 @@ class Seed
 
     Article.create!(title: "Hiding Secret Keys",
                     description: "A couple ways to hide secret keys in your application ",
-                    link: "#/hiding_keys" )
+                    link: "#/hiding_keys",
+                    active: true  )
 
     Article.create!(title: "Twitter OmniAuth",
                     description: "A tutorial on using Twitter's API for authentication",

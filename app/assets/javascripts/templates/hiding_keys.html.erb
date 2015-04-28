@@ -54,8 +54,10 @@ Once that finishes enter ``` figaro install ```
 * This will create a new file inside of the config folder of your application.
 * Head to ``` config/application.yml ```
 
-That file is where you will set all of the secret key variable names you want for your application
-To go off the my article on sending emails in a rails application, I will use the Mandrill API as an example
+That file is where you will set all of the secret key variable names you want for your application.
+
+
+To go off the my article on sending emails in a rails application, I will use the Mandrill API as an example.
 
 In ``` app/config/application.yml ``` add the following code.
 
@@ -67,7 +69,7 @@ mandrill_email: "your_registered_mandrill_email"
 > - Figaro will export all of the variables inside this file into the env hash for this application.
 
 
-In my tutorial on sending emails we were using the Mandrill API key in our application config.  The following code is an example of how oyu would access the variable once you set them inside the ``` application.yml ``` file
+In my tutorial on sending emails we were using the Mandrill API key in our application config.  The following code is an example of how your would access the variable once you set them inside the ``` application.yml ``` file
 
 ```ruby
 config.action_mailer.delivery_method = :smtp
