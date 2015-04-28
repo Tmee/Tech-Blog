@@ -12,8 +12,8 @@
 //
 //= require angular
 //= require angular-route
-//= require angular-md/dist/angular-md
 //= require angular-rails-templates
+//= require angular-md/dist/angular-md
 //= require jquery
 //= require jquery_ujs
 //= require app
