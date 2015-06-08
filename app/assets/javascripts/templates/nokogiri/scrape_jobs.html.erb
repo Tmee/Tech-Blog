@@ -119,7 +119,7 @@ rows = document.xpath("//div[contains(@class, 'container')]//div[contains(@class
       - document.xpath("//div[contains(@class, 'container')]//div[contains(@class, 'content')]
 //section[contains(@class,'jobs')]")
       - ...etc.
-    - try following the xpath manually in your insector.
+    - try following the xpath manually in your browser's dev tools.
   * Those rows are actually all of the ``` li ``` elements inside of the job table
   * This will return an ``` Nokogiri::XML::NodeSet ```, basically and array of nodesets
   * It has a bunch of information you don't care about,
