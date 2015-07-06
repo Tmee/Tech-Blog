@@ -37,10 +37,10 @@ end
 The bare bones of the NotePad will be a form and some buttons on the side of the search page.  When a user is logged in, the form will allow them to create, update, delete, and have a list of all their note titles.  I also want all the server side functionality to happen without having a page reload.
 
 
-This is where the wonders of jQuery come into play.  With jQuery, you are able to send AJAX requests back to the rails server and get a JSON response back.  You can call all the normal HTML requests (GET, PUT, POST, DELETE) without having to reload the page.  Once you have the response you asked for, all that's left is to add it onto the current page.
+This is where the wonders of jQuery come into play.  With jQuery, you are able to send AJAX requests back to the rails server and get a JSON response back.  You can call all the normal HTML requests (GET, PUT, POST, DELETE) without having to reload the page.  Once you have the response you asked for, all that's left is to add the data you want onto the current page.
 
 
-After some time spent figuring out JavaScript timing issues and those jQuery promises, the note pad is working.  Right now you can use it to create, update, and delete notes.  It has a list of all the current user's note titles, which gets updated on each change to a note.  There is also an auto save function on the body of the note, so if you try to leave the page without pushing the update button, you will not lose your new note.
+After some time spent figuring out jQuery loading and promise issues, the NotePad is working.  You can use it to create, update, and delete notes.  It has a list of all the current user's note titles, which gets updated on each change to a note.  There is also an auto save function on the body of the note, so if you try to leave the page without pushing the update button, you will not lose your new note.
 
 ----
   * You can see the code for each part of the NotePad on the [GitHub Repository](https://github.com/Tmee/Ruby-Finder/tree/master/app/assets/javascripts/notePad)
