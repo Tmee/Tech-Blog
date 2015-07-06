@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="large-12 columns">
+    <h2>jQuery NotePad <small>for <a href="http://rubyfinder.herokuapp.com">RubyFinder</a></small></h2>
+  </div>
+</div>
+
+<md>
+RubyFinder is a project I started during the end of my time at Turing.  It is a web scraper for jobs with "Ruby" as a keyword.
+
+
+For this new feature, I wanted to add a way for authenticated users to have multiple notes.  When I first created the user model it only had a column for a ``` text:note ```.  So, step one was to create the note model and set up the relation between the Users and Notes.
+</md>
+
+<div class="row">
+  <div class="large-6 colmns">
+<md>
+``` ruby
+Class User < ActiveRecord::Base
+  has_many :notes
+
+end
+```
+
+``` ruby
+Class Note < ActiveRecord::Base
+  belongs_to :user
+
+end
+```
+</md>
+  </div>
+</div><br/>
+
+<md>
+
+
+The bare bones of the NotePad will be a form and some buttons on the side of the search page.  When a user is logged in, the form will allow them to create, update, delete, and have a list of all their note titles.  I also want all the server side functionality to happen without having a page reload.
+
+
+This is where the wonders of jQuery come into play.  With jQuery, you are able to send AJAX requests back to the rails server and get a JSON response back.  You can call all the normal HTML requests (GET, PUT, POST, DELETE) without having to reload the page.  Once you have the response you asked for, all that's left is to add it onto the current page.
+
+
+After some time spent figuring out JavaScript timing issues and those jQuery promises, the note pad is working.  Right now you can use it to create, update, and delete notes.  It has a list of all the current user's note titles, which gets updated on each change to a note.  There is also an auto save function on the body of the note, so if you try to leave the page without pushing the update button, you will not lose your new note.
+
+----
+  * You can see the code for each part of the NotePad on the [GitHub Repository](https://github.com/Tmee/Ruby-Finder/tree/master/app/assets/javascripts/notePad)
+  * The app is live on heroku, [RubyFinder](http://rubyfinder.herokuapp.com)
+  * As always I'm still learning. If you see anything that looks crazy or is just wrong, [let me know](/#/about_me).
+----
+
+</md>
