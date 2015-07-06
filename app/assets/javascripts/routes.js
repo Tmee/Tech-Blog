@@ -29,6 +29,10 @@ app.config(['$routeProvider', function($routeProvider) {
         templateUrl: 'twitter_omniauth.html',
         controller: 'OmniAuthController'
       }).
+      when('/notepad', {
+        templateUrl: 'notePad.html',
+        controller: 'NotePadController'
+      }).
       otherwise({
         templateUrl: 'home.html',
         controller: 'HomeController'

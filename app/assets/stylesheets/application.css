@@ -17,6 +17,9 @@
  *= require_self
  */
 
+.link-icon {
+  width: 50px;
+}
 
 .nav-picture {
   height: 100px;

@@ -1,8 +1,8 @@
 <a ng-repeat="article in articles" ng-href="#{{article.link}}">
   <div class="panel callout index-panel large-6 columns text-center">
     <div class="large-12 columns">
-      <img ng-src="{{article.image}}" alt="{{article.image}}">
-    </div><br>
+      <img class="link-icon" ng-src="{{article.image}}" alt="{{article.image}}"/><br/>
+    </div>
     <h3>{{article.title}}</h3><hr/>
     <p>{{article.description}}</p>
   </div>
