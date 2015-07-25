@@ -1,6 +1,5 @@
 == Tech Blog
 
-Work in Progress
 
-* Browse the tutorials, hope they can help in some way.
+* Browse the tutorials, hope they can help.
 * {Tim Mee}[http://timothymee.net]
